@@ -69,7 +69,7 @@ If you have a lot of errors, devoted to impossibility to resolve different libs,
 Steps to fix:
 
 1. Install `react-app-rewired` and make it works
-2. Install all packages: 
+2. Install all packages:
 
    ```shell
    npm install stream-http https-browserify crypto-browserify scrypt-js buffer stream-browserify os-browserify url assert
