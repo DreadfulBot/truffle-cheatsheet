@@ -7,6 +7,7 @@
   - [Money converter](#money-converter)
   - [Get account balance](#get-account-balance)
   - [Calling contract with parameters](#calling-contract-with-parameters)
+  - [Running `web3-js` on `create-react-app` and `react-script@5.x.x` (`webpack 5.x.x.`)](#running-web3-js-on-create-react-app-and-react-script5xx-webpack-5xx)
 
 ---
 
@@ -60,3 +61,41 @@ web3.utils.fromWei(balance, "ether")
 // working with deployed instance of a contract below 
 app.sellArticle("iPhone", "Selling in order to buy iPhone 8", web3.utils.toWei("3", "ether"), { from: accounts[1] })
 ```
+
+## Running `web3-js` on `create-react-app` and `react-script@5.x.x` (`webpack 5.x.x.`)
+
+If you have a lot of errors, devoted to impossibility to resolve different libs, such as `buffer`, `scrypt`, `assert` and so on, this paragraph is for you.
+
+Steps to fix:
+
+1. Install `react-app-rewired` and make it works
+2. Install all packages: 
+
+   ```shell
+   npm install stream-http https-browserify crypto-browserify scrypt-js buffer stream-browserify os-browserify url assert
+   ```
+
+3. In `config-overrides.js` add those lines:
+
+   ```javascript
+   const loaders = config.resolve;
+
+   loaders.fallback = {
+      http: require.resolve("stream-http"),
+      https: require.resolve("https-browserify"),
+      crypto: require.resolve("crypto-browserify"),
+      scrypt: require.resolve("scrypt-js"),
+      buffer: require.resolve("buffer"),
+      stream: require.resolve("stream-browserify"),
+      os: require.resolve("os-browserify/browser"),
+      url: require.resolve("url"),
+      assert: require.resolve("assert"),
+   }
+
+   config.plugins.push(
+    new webpack.ProvidePlugin({
+      Buffer: ["buffer", "Buffer"],
+      process: "process/browser",
+    })
+   );
+   ```
