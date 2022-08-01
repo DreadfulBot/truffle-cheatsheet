@@ -2,11 +2,13 @@
 
 - [Truffle spreadsheet](#truffle-spreadsheet)
   - [Connect to ganache console](#connect-to-ganache-console)
+  - [Migrate and reset](#migrate-and-reset)
   - [Get loaded contract instance](#get-loaded-contract-instance)
   - [Get loaded accounts](#get-loaded-accounts)
   - [Money converter](#money-converter)
   - [Get account balance](#get-account-balance)
   - [Calling contract with parameters](#calling-contract-with-parameters)
+  - [Listening to event defined in contract](#listening-to-event-defined-in-contract)
   - [Running `web3-js` on `create-react-app` and `react-script@5.x.x` (`webpack 5.x.x.`)](#running-web3-js-on-create-react-app-and-react-script5xx-webpack-5xx)
 
 ---
@@ -15,6 +17,12 @@
 
 ```shell
 truffle console --network ganache
+```
+
+## Migrate and reset
+
+```shell
+truffle migrate --compile-all --reset
 ```
 
 ## Get loaded contract instance
@@ -60,6 +68,12 @@ web3.utils.fromWei(balance, "ether")
 ```javascript
 // working with deployed instance of a contract below 
 app.sellArticle("iPhone", "Selling in order to buy iPhone 8", web3.utils.toWei("3", "ether"), { from: accounts[1] })
+```
+
+## Listening to event defined in contract
+
+```javascript
+app.contract.events.LogSellArticle({fromBlock: 0}, (error, event) => { console.log(event); })
 ```
 
 ## Running `web3-js` on `create-react-app` and `react-script@5.x.x` (`webpack 5.x.x.`)
