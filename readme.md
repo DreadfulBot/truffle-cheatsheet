@@ -9,6 +9,7 @@
   - [Get account balance](#get-account-balance)
   - [Calling contract with parameters](#calling-contract-with-parameters)
   - [Listening to event defined in contract](#listening-to-event-defined-in-contract)
+  - [Loading already happen events](#loading-already-happen-events)
   - [Running `web3-js` on `create-react-app` and `react-script@5.x.x` (`webpack 5.x.x.`)](#running-web3-js-on-create-react-app-and-react-script5xx-webpack-5xx)
 
 ---
@@ -74,6 +75,12 @@ app.sellArticle("iPhone", "Selling in order to buy iPhone 8", web3.utils.toWei("
 
 ```javascript
 app.contract.events.LogSellArticle({fromBlock: 0}, (error, event) => { console.log(event); })
+```
+
+## Loading already happen events
+
+```javascript
+const events = await app.contract.getPastEvents("LogSellArticle", { fromBlock: 0 });
 ```
 
 ## Running `web3-js` on `create-react-app` and `react-script@5.x.x` (`webpack 5.x.x.`)
