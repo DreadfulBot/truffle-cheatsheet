@@ -11,6 +11,9 @@
   - [Listening to event defined in contract](#listening-to-event-defined-in-contract)
   - [Loading already happen events](#loading-already-happen-events)
   - [Running `web3-js` on `create-react-app` and `react-script@5.x.x` (`webpack 5.x.x.`)](#running-web3-js-on-create-react-app-and-react-script5xx-webpack-5xx)
+    - [Geth - unlock password error while `truffle migrate`](#geth---unlock-password-error-while-truffle-migrate)
+    - [Geth - making new account](#geth---making-new-account)
+    - [Geth - getting balance account](#geth---getting-balance-account)
 
 ---
 
@@ -120,3 +123,26 @@ Steps to fix:
     })
    );
    ```
+
+### Geth - unlock password error while `truffle migrate`
+
+*Make sure you are running geth instance
+*Geth attach
+*`personal.unlockAccount("ACCOUNT_ADDRESS")`
+*provide account password
+*`True` is printed if successfully unlocked
+
+### Geth - making new account
+
+```bash
+geth --datadir PATH_TO_PRIVATE_FOLDER account new
+```
+
+### Geth - getting balance account
+
+```bash
+eth.getBalance(eth.accounts[0])
+
+# pretty-print
+web3.fromWei(eth.getBalance(eth.accounts[0]))
+```
